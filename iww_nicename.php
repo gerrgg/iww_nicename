@@ -32,7 +32,7 @@ function nicename_menu(){
   <div class="container-fluid">
     <?php
     $list = iww_get_data();
-    nice_list();
+    nice_list( $list );
     ?>
 
   </div>
