@@ -30,6 +30,10 @@ function nicename_menu(){
 
 	?>
   <div class="container-fluid">
+    <form method="POST" action="<?php echo admin_url( 'admin-post.php' );?>">
+      <input type="hidden" name="action" value="optimize_products">
+      <input type="submit" name="submit" value="submit">
+    </form>
     <?php
     $list = iww_get_data();
     nice_list( $list );
@@ -39,7 +43,8 @@ function nicename_menu(){
   <?php
 }
 
-// add_action( 'admin_post_convert_titles', 'iww_convert_titles', 1 );
+add_action( 'admin_post_optimize_products', 'update_products', 1 );
+
 
 function get_nice_title( $id ){
   $title = get_post_meta( $id, "_yoast_wpseo_title", true );
@@ -107,7 +112,11 @@ function make_link( $url ){
   return '<a href="' . $url . '">View</a>';
 }
 
-function update_products( $list ){
+function update_products( ){
+
+  $list = iww_get_data();
+
+
   $targets = array(
     'name' => 'wccaf_nice_name',
     'desc' => '_yoast_wpseo_metadesc',
@@ -128,6 +137,8 @@ function update_products( $list ){
       }
     }
   }
+  // wp_redirect( 'http://ur54.com/wp/wp-admin/edit.php?post_type=product&page=iww_nicename' );
+  // exit;
 }
 
 function iww_get_data(){
